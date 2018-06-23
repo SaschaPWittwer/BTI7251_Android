@@ -7,9 +7,26 @@
     tools:context=".FragmentHost">
 
     <FrameLayout
-        android:id="@+id/mainframe"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/fragmentMessage"
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="25dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/mainframe"
+        android:layout_width="match_parent"
+        android:layout_height="401dp"
+        tools:layout_editor_absoluteY="110dp">
 
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>

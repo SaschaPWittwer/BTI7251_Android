@@ -3,10 +3,13 @@ package androidcrew.bti7251_android;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 /**
@@ -18,6 +21,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class MyFragment extends Fragment {
+    Button sendButton;
+    EditText editText;
+    View fragmentView;
 
 
     private OnFragmentInteractionListener mListener;
@@ -40,13 +46,14 @@ public class MyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my, container, false);
+        fragmentView = inflater.inflate(R.layout.fragment_my, container, false);
+        return  fragmentView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed(String message) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteraction(message);
         }
     }
 
@@ -58,7 +65,19 @@ public class MyFragment extends Fragment {
         } else {
             throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
+
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        sendButton = (Button)fragmentView.findViewById(R.id.sendmessage);
+        editText = (EditText)fragmentView.findViewById(R.id.messageforfragment);
+        sendButton.setOnClickListener(l -> {
+            onButtonPressed(editText.getText().toString());
+        });
+    }
+
 
     @Override
     public void onDetach() {
@@ -78,6 +97,6 @@ public class MyFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
 
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(String s);
     }
 }
