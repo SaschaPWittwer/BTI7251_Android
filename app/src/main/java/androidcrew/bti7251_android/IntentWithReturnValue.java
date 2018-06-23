@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class IntentWithReturnValue extends AppCompatActivity {
-    final static String returKey = "RETURN_VALUE";
+    final static String returnKey = "RETURN_VALUE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class IntentWithReturnValue extends AppCompatActivity {
 
         button.setOnClickListener(l -> {
             Intent output = new Intent();
-            output.putExtra(returKey, editText.getText().toString());
+            output.putExtra(returnKey, editText.getText().toString());
             setResult(RESULT_OK, output);
             finish();
         });

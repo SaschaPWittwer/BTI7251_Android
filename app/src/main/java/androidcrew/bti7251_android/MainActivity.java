@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == ACTIVITY_REQUEST_ID) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                String returnValue = data.getStringExtra(IntentWithReturnValue.returKey);
+                String returnValue = data.getStringExtra(IntentWithReturnValue.returnKey);
                 TextView textView = findViewById(R.id.textviewcallback);
                 textView.setText(returnValue);
 
