@@ -1,14 +1,16 @@
 package androidcrew.bti7251_android;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.AsyncTask;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidcrew.bti7251_android.fragments.FragmentHost;
+import androidcrew.bti7251_android.intents.IntentWithReturnValue;
+import androidcrew.bti7251_android.lists.listview.PeopleList;
+import androidcrew.bti7251_android.lists.recyclerview.PeopleRecycler;
 
 public class MainActivity extends AppCompatActivity {
     static final int ACTIVITY_REQUEST_ID = 1;
@@ -28,6 +30,18 @@ public class MainActivity extends AppCompatActivity {
         callBackButton.setOnClickListener(l -> {
             Intent intent = new Intent(this, IntentWithReturnValue.class);
             startActivityForResult(intent, ACTIVITY_REQUEST_ID);
+        });
+
+        Button peopleListActivity = (Button)findViewById(R.id.buttonlist);
+        peopleListActivity.setOnClickListener(l -> {
+            Intent intent = new Intent(this, PeopleList.class);
+            startActivity(intent);
+        });
+
+        Button recyclebutton = (Button)findViewById(R.id.buttonrecycle);
+        recyclebutton.setOnClickListener(l -> {
+            Intent intent = new Intent(this, PeopleRecycler.class);
+            startActivity(intent);
         });
 
     }

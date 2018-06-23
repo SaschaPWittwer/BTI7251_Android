@@ -22,19 +22,21 @@
         </activity>
 
         <service android:name=".TestService" />
-        <service android:name=".FirebaseIdService">
+        <service android:name=".firebase.FirebaseIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".FirebaseMessages">
+        <service android:name=".firebase.FirebaseMessages">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".FragmentHost" />
-        <activity android:name=".IntentWithReturnValue"></activity>
+        <activity android:name=".fragments.FragmentHost" />
+        <activity android:name=".intents.IntentWithReturnValue" />
+        <activity android:name=".lists.listview.PeopleList" />
+        <activity android:name=".lists.recyclerview.PeopleRecycler"></activity>
     </application>
 
 </manifest>

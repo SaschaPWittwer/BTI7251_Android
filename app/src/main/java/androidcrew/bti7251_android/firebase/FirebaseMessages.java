@@ -1,4 +1,4 @@
-package androidcrew.bti7251_android;
+package androidcrew.bti7251_android.firebase;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -15,6 +15,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Random;
+
+import androidcrew.bti7251_android.MainActivity;
 
 public class FirebaseMessages extends FirebaseMessagingService {
 

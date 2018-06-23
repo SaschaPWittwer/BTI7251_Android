@@ -1,4 +1,4 @@
-package androidcrew.bti7251_android;
+package androidcrew.bti7251_android.intents;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidcrew.bti7251_android.R;
+
 public class IntentWithReturnValue extends AppCompatActivity {
-    final static String returnKey = "RETURN_VALUE";
+    public final static String returnKey = "RETURN_VALUE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

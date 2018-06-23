@@ -1,10 +1,11 @@
-package androidcrew.bti7251_android;
+package androidcrew.bti7251_android.fragments;
 
-import android.net.Uri;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidcrew.bti7251_android.R;
 
 public class FragmentHost extends AppCompatActivity implements MyFragment.OnFragmentInteractionListener {
 

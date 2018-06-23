@@ -6,15 +6,17 @@ import android.widget.TextView;
 public class TestTask extends AsyncTask<Integer, Float, Double> {
 
     private MainActivity _activity;
+    TextView foo;
 
     public TestTask(MainActivity activity) {
         this._activity = activity;
+        foo = this._activity.findViewById(R.id.output);
     }
 
     @Override
     protected Double doInBackground(Integer... integers) {
         try {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 1; i < 6; i++) {
                 Thread.sleep(1000);
                 this.publishProgress(Float.valueOf(i * 20));
             }
@@ -27,18 +29,16 @@ public class TestTask extends AsyncTask<Integer, Float, Double> {
 
     @Override
     protected void onPreExecute() {
-        super.onPreExecute();
+       foo.setText("Starting");
     }
 
     @Override
     protected void onPostExecute(Double integer) {
-        TextView foo = this._activity.findViewById(R.id.output);
         foo.setText("Result: " + integer);
     }
 
     @Override
     protected void onProgressUpdate(Float... values) {
-        TextView foo = this._activity.findViewById(R.id.output);
         foo.setText("Progress: " + values[0]);
     }
 }

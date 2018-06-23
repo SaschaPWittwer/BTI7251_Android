@@ -1,4 +1,4 @@
-package androidcrew.bti7251_android;
+package androidcrew.bti7251_android.firebase;
 
 import android.util.Log;
 
