@@ -19,13 +19,7 @@ public class DoStuffRunnable implements Runnable {
         try {
             for (int i = 1; i < 6; i++) {
                 Thread.sleep(1000);
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //this.textView.setText(Float.toString( Float.valueOf(i * 20)));
-                    }
-                });
-
+                activity.runOnUiThread(new DoInForeground(activity, i));
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

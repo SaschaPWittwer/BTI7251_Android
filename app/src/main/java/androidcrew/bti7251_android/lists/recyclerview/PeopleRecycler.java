@@ -21,7 +21,7 @@ public class PeopleRecycler extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_people_recycler);
-        setContentView(R.layout.activity_people_recycler);
+
 
         dataProvider = new DataProvider(30);
 

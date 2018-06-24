@@ -17,6 +17,7 @@ import androidcrew.bti7251_android.fragments.FragmentHost;
 import androidcrew.bti7251_android.intents.IntentWithReturnValue;
 import androidcrew.bti7251_android.lists.listview.PeopleList;
 import androidcrew.bti7251_android.lists.recyclerview.PeopleRecycler;
+import androidcrew.bti7251_android.service.CockpitService;
 
 public class MainActivity extends AppCompatActivity {
     static final int ACTIVITY_REQUEST_ID = 1;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Button fragmentbutton = (Button)findViewById(R.id.buttonFragment);
         fragmentbutton.setOnClickListener(l -> {
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, PeopleRecycler.class);
             startActivity(intent);
         });
+        
+
         SharedPreferences sharedPref = getPreferences(this.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -76,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onAsyncTaskButtonClick(View btn){
-       new TestTask(this).execute(5);
+        AsyncTask.execute(new DoStuffRunnable(this));
     }
 
     public void onImageIntentButtonClick(View btn) {
@@ -98,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
 
-
+        Intent service = new Intent(this, CockpitService.class);
+        //startService(service);
+    }
 }
