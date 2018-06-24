@@ -1,12 +1,18 @@
 package androidcrew.bti7251_android;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import androidcrew.bti7251_android.background.DoStuffRunnable;
 import androidcrew.bti7251_android.fragments.FragmentHost;
 import androidcrew.bti7251_android.intents.IntentWithReturnValue;
 import androidcrew.bti7251_android.lists.listview.PeopleList;
@@ -43,14 +49,38 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, PeopleRecycler.class);
             startActivity(intent);
         });
+        SharedPreferences sharedPref = getPreferences(this.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        //Important Settings in shared preferences
+        EditText cockPitsettings = findViewById(R.id.textcockpitname);
+        cockPitsettings.setText( sharedPref.getString("Sergey", "No Cockpitname"));
+        cockPitsettings.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+               editor.putString("Sergey", s.toString());
+               editor.commit();
+            }
+        });
 
     }
 
     public void onAsyncTaskButtonClick(View btn){
-        new TestTask(this).execute(5);
+       new TestTask(this).execute(5);
     }
 
     public void onImageIntentButtonClick(View btn) {
+
         //Intent imageIntent = new Intent()
     }
 
