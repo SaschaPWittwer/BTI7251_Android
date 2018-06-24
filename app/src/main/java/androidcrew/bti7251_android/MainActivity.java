@@ -1,6 +1,7 @@
 package androidcrew.bti7251_android;
 
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +13,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import androidcrew.bti7251_android.background.DoStuffRunnable;
 import androidcrew.bti7251_android.fragments.FragmentHost;
 import androidcrew.bti7251_android.intents.IntentWithReturnValue;
+import androidcrew.bti7251_android.lists.Person;
 import androidcrew.bti7251_android.lists.listview.PeopleList;
 import androidcrew.bti7251_android.lists.recyclerview.PeopleRecycler;
 import androidcrew.bti7251_android.service.CockpitService;
+import androidcrew.bti7251_android.service.SergeyServiceConnection;
 
 public class MainActivity extends AppCompatActivity {
     static final int ACTIVITY_REQUEST_ID = 1;
@@ -51,7 +60,43 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, PeopleRecycler.class);
             startActivity(intent);
         });
-        
+
+        Intent sergeyService = new Intent(this, CockpitService.class);
+        SergeyServiceConnection sergeyServiceConnection = new SergeyServiceConnection();
+        bindService(sergeyService, sergeyServiceConnection,BIND_AUTO_CREATE);
+
+
+        Button sergeyButton = findViewById(R.id.buttonsergeyaction);
+        sergeyButton.setOnClickListener(l -> {
+            sergeyServiceConnection.logStuff("Huereee Gayyy!!!!!");
+        });
+
+        Button raperButton = findViewById(R.id.buttonrandomraper);
+        raperButton.setOnClickListener(l -> {
+            sergeyServiceConnection.getCockpitService().addPerson();
+        });
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference personReference = database.getReference("Person");
+
+        EditText currentRaperView = findViewById(R.id.multicurrentraper);
+
+        personReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Person currentRaper = dataSnapshot.getValue(Person.class);
+                currentRaperView.setText(currentRaper.toString());
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
         SharedPreferences sharedPref = getPreferences(this.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();

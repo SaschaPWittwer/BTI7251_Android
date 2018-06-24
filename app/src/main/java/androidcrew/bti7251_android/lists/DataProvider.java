@@ -26,7 +26,7 @@ public class DataProvider {
         }
     }
 
-    Person createRandomPerson(int id){
+    public Person createRandomPerson(int id){
         Random rand = new Random();
         return new Person(
                 names.get(rand.nextInt(names.size()-1)),

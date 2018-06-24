@@ -11,16 +11,25 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import androidcrew.bti7251_android.R;
+import androidcrew.bti7251_android.lists.DataProvider;
+import androidcrew.bti7251_android.lists.Person;
 
 public class CockpitService extends Service{
     public static final String ANDROID_CHANNEL_ID = "GEILIID69";
+    List<Person> people = new ArrayList<>();
+    DatabaseReference personReference;
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return new SergeyBinder(this);
     }
 
 
@@ -28,6 +37,8 @@ public class CockpitService extends Service{
     @Override
     public void onCreate() {
         super.onCreate();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        personReference = database.getReference("Person");
         createNotificationChannel();
         Log.i("Cockpit", "Cockpit Service started");
 
@@ -51,11 +62,17 @@ public class CockpitService extends Service{
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    addPerson();
                     Log.i("Cockpit", "I'm still running");
                 }
             }
         });
     }
+
+    public void logStuff(String message){
+        Log.i("Cockpit", message);
+    }
+
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -70,5 +87,10 @@ public class CockpitService extends Service{
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+
+    public void addPerson(){
+        DataProvider dataProvider = new DataProvider(0);
+        personReference.setValue(dataProvider.createRandomPerson(69));
     }
 }
